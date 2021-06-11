@@ -48,7 +48,7 @@ const DataBar = (props) => {
           <h3>Calories Eaten</h3>
         </div>
         <div className="databar-calories" style={progressColor}>
-          <ProgressCircle  progress={progress} circleSize="300" calories={caloriesLeft} message={calMessage}/>
+          <ProgressCircle  progress={progress} circleSize="480" calories={caloriesLeft} message={calMessage}/>
         </div>
         <div className="databar-data">
           <h2>{burnt}</h2>

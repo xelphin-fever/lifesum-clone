@@ -11,11 +11,10 @@ const DataBar = (props) => {
   const fontSize3 = {
     fontSize: `${Math.round(Number(props.circleSize)/12)}px`
   }
-  console.log('fontsize: ', fontSize2);
 
   return (
     <div  className="progresscircle">
-        <CircularProgress variant="determinate" value={props.progress} size={`${props.circleSize}px`} color="inherit"/>
+        <CircularProgress variant="determinate" value={props.progress} size={`${props.circleSize}px`} color="inherit" thickness={1.2}/>
           <div  className="progresscircle-text">
             <h2 style={fontSize2}>{props.calories}</h2>
             <h3  style={fontSize3}>{props.message}</h3>

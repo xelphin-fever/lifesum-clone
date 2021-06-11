@@ -13,6 +13,7 @@ button{
   background-color: var(--primary);
   color: var(--primary-letter);
   padding: 15px;
+  border-radius: 0 0 5% 5%;
 }
 .page-home-top button{
   color: var(--primary-letter);
