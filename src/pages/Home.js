@@ -7,26 +7,15 @@ import '../stylesheets/Home.css';
 import firebase from '../firebase';
 import {formatDate} from '../functions/helperFunctions';
 import {dateReducer} from '../functions/reducers';
+import {dataFrame} from '../functions/constants'
 
 const Home = (props) => {
   // TODO: Listen to firestore change, update props
   // VARIABLES
-  const dataFrame = {
-    sumCal : 0,
-    sumFat : 0,
-    sumProtein : 0,
-    sumCarb : 0,
-    meals: {
-      breakfast: [],
-      lunch: [],
-      dinner: [],
-      snacks: [],
-    },
-  }
   const [stateDate, dispatchDate] = useReducer(dateReducer, {date: new Date()});
   const [date, setDate] = useState(formatDate(new Date())); // xx-xx-xx
   const [isSigned, setIsSigned] = useState(!!firebase.auth().currentUser);
-  const [data, setData] = useState(dataFrame);
+  const [data, setData] = useState(dataFrame); // FIX: also update on any updates to Doc
 
   useEffect(() => {
     console.log('the date recorded now is: ', formatDate(stateDate.date));
@@ -55,10 +44,12 @@ const Home = (props) => {
           if (docSnapshot.exists) {
             usersRef.onSnapshot((doc) => {
               console.log('the doc of this date does exist!', doc);
+              setData(doc.data()); 
             });
           } else {
             console.log('the doc was not found, need to create it');
-            usersRef.set(dataFrame);
+            usersRef.set(dataFrame); // Created Doc
+            setData(dataFrame);
           }
       });
     }
@@ -72,7 +63,7 @@ const Home = (props) => {
       <div  className="page-home">
         <div className="page-home-top">
           <button onClick={() => {firebase.auth().signOut()}}>Sign Out</button>
-          <DataBar/>
+          <DataBar date={date} data={data}/>
         </div>
         
         <DateChanger date={date} dispatchDate={dispatchDate}/>

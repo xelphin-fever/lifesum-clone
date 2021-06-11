@@ -2,14 +2,14 @@ import React, {useState, useEffect} from 'react';
 // import styled from 'styled-components'
 import '../stylesheets/DataBar.css'
 import ProgressCircle from './ProgressCircle'
-
+import firebase from '../firebase';
 
 const DataBar = (props) => {
   // TODO: Listen for Firestore update on specific user at day, and update firestore
 
-  const [goal, setGoal] = useState(1250);
-  const [eaten, setEaten] = useState(1150);
-  const [burnt, setBurnt] = useState(50);
+  const [goal, setGoal] = useState(1250); // Create Firestore Users -> [uid] -> Config -> config : has goal
+  const [eaten, setEaten] = useState(0);
+  const [burnt, setBurnt] = useState(0);
 
   const [sumCalories, setSumCalories] = useState(0);
   const [caloriesLeft, setCaloriesLeft] = useState(0);
@@ -17,6 +17,15 @@ const DataBar = (props) => {
   const [progressColor, setProgressColor] = useState({color: "white"});
   const [calMessage, setCalMessage] = useState("Calories Left")
   // TODO: useEffect when props changes and setState to what's needed
+
+
+  useEffect(() => { // FIX: This only changes on Date change, not on update!!!!
+    // Maybe make it listen to the change in the document directly instead of through props
+    setEaten(props.data.sumCal);
+    setBurnt(props.data.sumBurnt);
+  }, [props.data]);
+
+
 
   useEffect(()=> {
     let sum = eaten -burnt;
@@ -32,6 +41,8 @@ const DataBar = (props) => {
       left = sumCalories - goal;
       setCalMessage("Calories Over");
       setProgressColor({color: "rgb(219, 138, 105)"})
+    } else {
+      setProgressColor({color: "white"})
     }
     if (calc>200){
       calc= 100;
