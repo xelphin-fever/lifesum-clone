@@ -1,0 +1,31 @@
+button{
+  background-color: transparent;
+  border: none;
+  font-size: 30px;
+}
+
+.page-home{
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.page-home-top{
+  background-color: var(--primary);
+  color: var(--primary-letter);
+  padding: 15px;
+}
+.page-home-top button{
+  color: var(--primary-letter);
+  border: 1px solid var(--primary-letter);
+}
+
+.datechanger{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px 70px;
+}
+
+.page-home-mealbars{
+  padding: 50px 60px;
+}

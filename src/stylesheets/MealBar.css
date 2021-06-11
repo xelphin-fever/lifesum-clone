@@ -1,0 +1,60 @@
+.mealbar{
+  box-shadow: 8px 8px var(--light-gray);
+  border: 2px solid var(--gray);
+  padding: 20px 30px;
+  margin: 30px 0;
+  transition: 0.1s all linear;
+
+}
+.mealbar:hover{
+  box-shadow: 4px 4px var(--light-gray);
+  transform: translate(4px,4px);
+}
+
+.mealbar-top {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+}
+.mealbar-emoji{
+  font-size: 150px;
+  margin: 0 20px 0 10px;
+}
+.mealbar-text{
+  margin-left: 40px;
+}
+.mealbar-text h2{
+  font-size: 60px;
+  margin: 0;
+}
+.mealbar-text h3{
+  color: var(--black);
+  margin: 10px 0 0 0;
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+}
+
+.mealbar-top button{
+  position:absolute;
+  background-color: var(--light-gray);
+  border-radius: 50%;
+  padding: 10px 24px;
+  font-size: 50px;
+  right: 50px;
+  top: 35%;
+  transition: 0.1s all linear;
+}
+.mealbar-top button:hover{
+  background-color: var(--gray);
+}
+
+.mealbar-bottom{
+  display: flex;
+  justify-content: center;
+}
+.mealbar-bottom h2{
+  margin: 0;
+}

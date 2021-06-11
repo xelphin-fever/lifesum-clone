@@ -1,0 +1,31 @@
+.databar{
+  padding: 50px 0;
+  color: var(--primary-letter);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.databar-top, .databar-bottom{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+.databar-bottom{
+  margin-top: 50px;
+}
+.databar-data{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--primary-letter);
+}
+.databar-data h2{
+  font-size: 40px;
+  margin: 20px 0;
+}
+.databar-data h3{
+  font-size: 25px;
+  margin: 5px 0;
+}
