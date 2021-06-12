@@ -5,6 +5,7 @@ import {formatDate} from '../functions/helperFunctions';
 import ProgressCircle from '../components/ProgressCircle';
 import firebase from '../firebase';
 import {dataFrame} from '../functions/constants';
+import DataList from '../components/DataList.js';
 
 const Meal = (props) => {
   let meal = useRouteMatch('/meal/:id').url.split('/');
@@ -34,7 +35,7 @@ const Meal = (props) => {
   firebase.auth().onAuthStateChanged(() => {
     setIsSigned(!!firebase.auth().currentUser);
   });
-  // TODO: make a doc change lister as well?
+  // TODO: make a 'doc change' lister as well?
 
 
   useEffect(() => {
@@ -62,6 +63,13 @@ const Meal = (props) => {
         </div>
         <h2>{meal}</h2>
         <h3>{formatDate(props.date)}</h3>
+      </div>
+      <button>Add Food</button>
+      <div className="page-meal-foodlist">
+
+      </div>
+      <div className="page-meal-datalist">
+        <DataList data={data} goal={goal}/>
       </div>
     </div>
   );

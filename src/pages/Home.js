@@ -11,6 +11,7 @@ import {dataFrame} from '../functions/constants';
 const Home = (props) => {
   // TODO: Listen to firestore change, update props
   // VARIABLES
+  const meals = ["breakfast", "lunch", "dinner", "snacks"];
   const [date, setDate] = useState(formatDate(new Date())); // xx-xx-xx
   const [isSigned, setIsSigned] = useState(!!firebase.auth().currentUser);
   const [data, setData] = useState(dataFrame); // FIX: also update on any updates to Doc
@@ -66,10 +67,7 @@ const Home = (props) => {
         
         <DateChanger date={date} dispatchDate={props.dispatchDate}/>
         <div className="page-home-mealbars">
-          <MealBar meal="breakfast" totalCal="300"/>
-          <MealBar meal="lunch" totalCal="300"/>
-          <MealBar meal="dinner" totalCal="300"/>
-          <MealBar meal="snacks" totalCal="300"/>
+          {meals.map((meal) => <MealBar meal={meal} totalCal={data.meals[meal].sumCal} key={meal}/>)}
         </div>
       </div>
     );

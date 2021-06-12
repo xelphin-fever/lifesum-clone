@@ -1,0 +1,26 @@
+
+
+.datalist-portion{
+  padding: 30px 50px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-letter);
+  width: 100%;
+  margin: 30px 0;
+}
+
+.datalist h1{
+  width: fit-content;
+  font-size: 3em;
+  font-weight: 500;
+}
+
+.datalist-info{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.datalist h2{
+  width: fit-content;
+}

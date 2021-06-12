@@ -1,11 +1,7 @@
-import React, {useState, useEffect, useReducer} from 'react';
-import {dateReducer} from '../functions/reducers';
+import React from 'react';
 // import styled from 'styled-components'
 
-
-
 const DateChanger = (props) => {
-  
 
   return (
     <div  className="datechanger">
