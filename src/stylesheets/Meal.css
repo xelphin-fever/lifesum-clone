@@ -1,0 +1,17 @@
+
+
+.page-meal-top{
+  background-color: var(--primary);
+  color: white;
+  padding: 80px 50px 60px 50px;
+  border-radius: 0 0 5% 5%;
+}
+
+.page-meal-progress{
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.page-meal-top h2{
+  font-size: 35px;
+}

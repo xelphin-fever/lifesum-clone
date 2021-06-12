@@ -7,7 +7,7 @@ import firebase from '../firebase';
 const DataBar = (props) => {
   // TODO: Listen for Firestore update on specific user at day, and update firestore
 
-  const [goal, setGoal] = useState(1250); // Create Firestore Users -> [uid] -> Config -> config : has goal
+  const [goal, setGoal] = useState(1250); // TODO: Create Firestore Users -> [uid] -> Config -> config : has goal
   const [eaten, setEaten] = useState(0);
   const [burnt, setBurnt] = useState(0);
 
@@ -20,7 +20,8 @@ const DataBar = (props) => {
 
 
   useEffect(() => { // FIX: This only changes on Date change, not on update!!!!
-    // Maybe make it listen to the change in the document directly instead of through props
+    // Maybe make it listen to the change in the document directly instead of through props stateData
+    // Or, with date:reload reducer can be fired on updates so as to update this
     setEaten(props.data.sumCal);
     setBurnt(props.data.sumBurnt);
   }, [props.data]);

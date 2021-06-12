@@ -5,7 +5,6 @@ import {dateReducer} from '../functions/reducers';
 
 
 const DateChanger = (props) => {
-  // TODO: Listen for Firestore update on specific user at day, and update firestore
   
 
   return (

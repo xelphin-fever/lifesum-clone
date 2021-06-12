@@ -8,4 +8,9 @@ const formatDate = (date) => {
   return date;
 }
 
+// TODO: Make function that updates the firestore data
+//    For Example, if added food in one, updates all the macros and nutrients and stuff to match
+//    Updates firestore
+//    Does 'update' to date
+
 export {formatDate}
