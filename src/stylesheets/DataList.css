@@ -15,12 +15,32 @@
   font-weight: 500;
 }
 
-.datalist-info{
+.datalist-info, .datalist-info-pie, .datalist-pie-label{
   display: flex;
   flex-direction: row;
+  align-items: center;
+}
+.datalist-info{
   justify-content: space-between;
+}
+
+.datalist-pie-info{
+  width: 100%;
 }
 
 .datalist h2{
   width: fit-content;
 }
+
+.datalist-pie{
+  width: 200px;
+}
+
+.datalist-pie-color{
+  width: 20px;
+  height: 20px;
+  background-color: rgb(147, 189, 147);
+  border-radius: 50%;
+  margin: 0 20px;
+}
+
