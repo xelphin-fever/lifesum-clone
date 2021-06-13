@@ -1,0 +1,57 @@
+.foodbar{
+  width: 85%;
+  box-shadow: 8px 8px var(--light-gray);
+  border: 2px solid var(--gray);
+  padding: 20px 40px;
+  margin: 30px 0;
+  transition: 0.1s all linear;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.foodbar:hover{
+  box-shadow: 4px 4px var(--light-gray);
+  transform: translate(4px,4px);
+}
+
+.foodbar-text{
+  display: flex;
+  flex-direction: column;
+}
+
+.foodbar-text h2{
+  font-size: 40px;
+  font-weight: 500;
+}
+.foodbar-text h3{
+  font-size: 30px;
+}
+
+.foodbar button{
+  background-color: var(--light-gray);
+  border-radius: 50%;
+  padding: 10px 24px;
+  height: fit-content;
+  font-size: 50px;
+  right: 50px;
+  top: 35%;
+  transition: 0.1s all linear;
+}
+.foodbar button:hover{
+  background-color: var(--gray);
+}
+
+.foodbar img{
+  width: 150px;
+  height: 150px;
+  background-size: cover;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+.foodbar-left{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

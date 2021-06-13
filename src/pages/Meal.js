@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import '../stylesheets/Meal.css'
-import { useRouteMatch } from "react-router-dom";
+import { useRouteMatch, Link } from "react-router-dom";
 import {formatDate} from '../functions/helperFunctions';
 import ProgressCircle from '../components/ProgressCircle';
 import firebase from '../firebase';
@@ -64,12 +64,20 @@ const Meal = (props) => {
         <h2>{meal}</h2>
         <h3>{formatDate(props.date)}</h3>
       </div>
-      <button>Add Food</button>
+      <Link to={`${meal}/search`} className="page-meal-search-link">
+        <button>Add Food</button>
+      </Link>
       <div className="page-meal-foodlist">
 
       </div>
       <div className="page-meal-datalist">
         <DataList data={data} goal={goal}/>
+      </div>
+
+      <div className="page-meal-back-div">
+        <Link to="/">
+          <h2>⬅</h2>
+        </Link>
       </div>
     </div>
   );

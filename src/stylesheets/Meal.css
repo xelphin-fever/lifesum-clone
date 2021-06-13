@@ -23,6 +23,12 @@
   font-size: 35px;
 }
 
+.page-meal-search-link{
+  width: 100%;
+  display:flex;
+  justify-content: center;
+}
+
 .page-meal button{
   background-color: var(--primary);
   border-radius: 50px;
@@ -40,4 +46,12 @@
 
 .page-meal-datalist, .page-meal-foodlist{
   width: 100%;
+}
+
+.page-meal-back-div{
+  position: absolute;
+  top: 0;
+  left: 50px;
+  color: white;
+  font-size: 40px;
 }

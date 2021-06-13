@@ -4,7 +4,6 @@
   padding: 20px 30px;
   margin: 30px 0;
   transition: 0.1s all linear;
-
 }
 .mealbar:hover{
   box-shadow: 4px 4px var(--light-gray);

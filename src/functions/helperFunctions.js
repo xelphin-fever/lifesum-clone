@@ -8,9 +8,17 @@ const formatDate = (date) => {
   return date;
 }
 
+const capitalize = (string) => {
+  if (string !== "" && (typeof string === "string")){
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+  return undefined;
+  
+}
+
 // TODO: Make function that updates the firestore data
 //    For Example, if added food in one, updates all the macros and nutrients and stuff to match
 //    Updates firestore
 //    Does 'update' to date
 
-export {formatDate}
+export {formatDate, capitalize}
