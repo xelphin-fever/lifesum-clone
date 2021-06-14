@@ -10,7 +10,12 @@ const DataList = (props) => {
       protein: Number(props.data.sumProtein),
       carb: Number(props.data.sumCarb),
     }
-    return Math.round((types[type]/(Number(props.data.sumFat)+Number(props.data.sumProtein)+Number(props.data.sumCarb)))*100);
+    // CHANGED BELOW TO TAKE INTO ACCOUNT DIVISION BY 0
+    if (Number(props.data.sumFat)+Number(props.data.sumProtein)+Number(props.data.sumCarb)!==0){
+      return Math.round((types[type]/(Number(props.data.sumFat)+Number(props.data.sumProtein)+Number(props.data.sumCarb)))*100);
+    }
+    return 0;
+    
   }
 
   const typeColor = {

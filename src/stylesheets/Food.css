@@ -79,5 +79,12 @@
   margin: 0 auto;
 }
 
+/**/
+.page-food-trackDiv{
+  position: fixed;
+  bottom: 0;
+  width: 60%;
+  left: calc(50vw - 30%);
+}
 
 

@@ -67,9 +67,24 @@ const MessageDiv = styled.div`
     width: fit-content;
     font-size: 15px;
   }
+`;
 
+const PrimaryButton = styled.div`
+  background-color: var(--primary);
+  border-radius: 50px;
+  width: ${props => props.width || "100%"};
+  color: white;
+  font-weight: 500;
+  font-size: 40px;
+  margin: 50px auto;
+  padding: 30px 0;
+  transition: 0.1s linear all;
+  text-align: center;
+  &: hover{
+    background-color: var(--primary-dark);
+  }
 `;
 
 
 
-export {Dropdown, DropdownElement, MessageDiv};
+export {Dropdown, DropdownElement, MessageDiv, PrimaryButton};

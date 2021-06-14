@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react';
 import '../stylesheets/Food.css';
 import {Link, useRouteMatch} from "react-router-dom";
 import {foodFrame} from '../functions/constants';
-import {formatDate, findNutrient} from '../functions/helperFunctions';
-import {Dropdown, DropdownElement, MessageDiv} from '../stylesheets/styledComponents';
+import {formatDate, findNutrient, addFood} from '../functions/helperFunctions';
+import {Dropdown, DropdownElement, MessageDiv , PrimaryButton} from '../stylesheets/styledComponents';
 import ProgressCircle from '../components/ProgressCircle';
+import firebase from '../firebase';
 
 const Food = (props) => {
   const link = useRouteMatch('/meal/:id/search/:id').url.split('/');
@@ -49,6 +50,31 @@ const Food = (props) => {
     setMacrosPer([["protein",myMacros.percentProtein], ["fat",myMacros.percentFat], ["carbs", myMacros.percentCarbs]]);
   }, [result])
 
+  // TRACK FOOD
+  
+  //
+  const trackFood = () => {
+    // TODO: Check for Sign In (if not timeout for 0.3s and try again maybe)
+    let firestore = firebase.firestore();
+    const usersRef = firestore.collection('users').doc(firebase.auth().currentUser.uid).collection('days').doc(formatDate(props.date))
+    usersRef.get()
+      .then((docSnapshot) => {
+        if (docSnapshot.exists) {
+          usersRef.onSnapshot((doc) => {
+            console.log('TRACKFOOD data: ', doc.data());
+             const newData = addFood(doc.data(), meal, result);
+             console.log('TRACKFOOD data: ',newData);
+             // TODO: Update firestore to contain 'newData' at date
+             // TODO: dispatch updateDate?
+          });
+        } else {
+          console.log('the doc was not found, need to create it');
+        }
+    });
+  }
+
+
+
   return (
     <div  className="page-food">
       <div className="page-food-top">
@@ -59,7 +85,7 @@ const Food = (props) => {
         <div className="page-food-inputs">
           <MessageDiv>
             <h2 className="component-message">Press Enter to Submit</h2>
-            <input type="number" min="0" id="page-food-amount"/>
+            <input type="number" min="1" id="page-food-amount"/>
           </MessageDiv>
           <Dropdown fontSize="55px">
             <button className="dropdown-btn">{unit} ⏷</button>
@@ -103,23 +129,11 @@ const Food = (props) => {
         </div>
       </div>
 
+      <div className="page-food-trackDiv">
+        <PrimaryButton onClick={trackFood}>Track Food</PrimaryButton>
+      </div>
     </div>
   );
 }
 
 export default Food;
-
-
-/*
-
-          <Dropdown>
-            <button className="dropdown-btn">{unit}</button>
-            <div className="dropdown-content">
-              {
-                result.possibleUnits.map((unit) => {
-                  return <DropdownElement key={unit}> {unit} </DropdownElement>
-                })
-              }
-            </div>
-          </Dropdown>
-*/

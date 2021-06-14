@@ -6,6 +6,7 @@ import ProgressCircle from '../components/ProgressCircle';
 import firebase from '../firebase';
 import {dataFrame} from '../functions/constants';
 import DataList from '../components/DataList.js';
+import {PrimaryButton} from '../stylesheets/styledComponents';
 
 const Meal = (props) => {
   let meal = useRouteMatch('/meal/:id').url.split('/');
@@ -65,7 +66,7 @@ const Meal = (props) => {
         <h3>{formatDate(props.date)}</h3>
       </div>
       <Link to={`${meal}/search`} className="page-meal-search-link">
-        <button>Add Food</button>
+        <PrimaryButton width="60%">Add Food</PrimaryButton>
       </Link>
       <div className="page-meal-foodlist">
 
