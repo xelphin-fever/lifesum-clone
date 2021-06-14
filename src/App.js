@@ -4,12 +4,14 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from './pages/Home';
 import Meal from './pages/Meal';
 import Search from './pages/Search';
+import Food from './pages/Food';
 import SignIn from './pages/SignIn';
-import {dateReducer} from './functions/reducers';
+import {dateReducer, resultsReducer} from './functions/reducers';
 
 function App() {
 
   const [stateDate, dispatchDate] = useReducer(dateReducer, {date: new Date()});
+  const [stateResults, dispatchResults] = useReducer(resultsReducer, {results: []});
 
   return (
     <div className="App">
@@ -18,7 +20,8 @@ function App() {
           <Route exact path='/' component={() => <Home date={stateDate.date} dispatchDate={dispatchDate} />}/>
           <Route exact path='/meal/:id' component={() => <Meal date={stateDate.date} dispatchDate={dispatchDate}/>}/>
           <Route exact path='/signin' component={() => <SignIn/>}/>
-          <Route exact path='/meal/:id/search' component={() => <Search date={stateDate.date}/>}/>
+          <Route exact path='/meal/:id/search' component={() => <Search date={stateDate.date} results={stateResults.results} dispatchResults={dispatchResults}/>}/>
+          <Route exact path='/meal/:id/search/:id' component={() => <Food date={stateDate.date}/>}/>
         </Switch>
       </Router>
     </div>

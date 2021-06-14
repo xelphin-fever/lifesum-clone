@@ -30,5 +30,15 @@ function dataReducer (state, action) {
   }
 }
 
+// CHANGE DATA
+function resultsReducer (state, action) {
+  switch (action.type) {
+    case 'update':
+      return {results: action.payload};
+    default:
+      throw new Error();
+  }
+}
 
-export {dateReducer, dataReducer};
+
+export {dateReducer, dataReducer, resultsReducer};

@@ -1,0 +1,83 @@
+.page-food {
+  background-color: var(--light);
+  min-height: 100vh;
+}
+
+.page-food-top{
+  background-color: var(--primary);
+  height: 35vh;
+  position: relative;
+}
+.page-food-top h2{
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  font-weight: 500;
+  font-size: 60px;
+  margin: 0;
+}
+
+
+.page-food-section{
+  margin: 40px 30px;
+  padding: 20px 70px;
+  background-color: var(--primary-letter);
+}
+.page-food-section h2{
+  font-size: 50px;
+}
+.page-food-section h3{
+  font-size: 40px;
+}
+
+.page-food-inputs, .page-food-macros{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#page-food-amount{
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 55px;
+  width: 200px;
+}
+#page-food-amount:focus{
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+
+/**/
+.page-food-nutrients{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.page-food-nutrient {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 20px 0;
+  border-bottom: 1px solid black;
+}
+.page-food-nutrient-top-text{
+  font-size: 2em;
+  margin: 10px 0;
+}
+.page-food-nutrient-top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.page-food-nutrient-percent{
+  font-size: 1.5em;
+  margin: 0 auto;
+}
+
+
+

@@ -9,7 +9,6 @@ const Search = (props) => {
   meal=meal[meal.length-2];
   // console.log('date: ', props.date);
   const [search, setSearch] = useState('');
-  const [results, setResults] = useState([]); 
   const baseSrc = "https://spoonacular.com/cdn/ingredients_100x100/";
 
   // LISTEN FOR 'ENTER' EVENT AND UPDATE SEARCH INPUT
@@ -40,7 +39,7 @@ const Search = (props) => {
         let data = await response.json();
         if (isCancelled === false) {
           console.log('Results: ', data);
-          setResults(data.results);
+          props.dispatchResults({type: 'update', payload: data.results});
         }
       }
       fetchResults();
@@ -64,8 +63,8 @@ const Search = (props) => {
       </div>
       <div className="page-search-items">
         {
-          results.map((item) => {
-            return <FoodBar key={item.id} data-id={item.id} title={item.name} imgSrc={baseSrc+item.image}/>
+          props.results.map((item) => {
+            return <FoodBar key={item.id} id={'foodId-'+item.id} title={item.name} imgSrc={baseSrc+item.image} meal={meal}/>
           })
         }
       </div>

@@ -34,19 +34,22 @@ const MealBar = (props) => {
 
   return (
     <div  className="mealbar">
-      <Link to={`meal/${meal}`}>
+      
         <div className="mealbar-top">
           <h2 className="mealbar-emoji">{options[meal].emoji}</h2>
+          <Link to={`meal/${meal}`}>
           <div className="mealbar-text">
             <h2>{options[meal].title}</h2>
             <h3>Here I'll write down a list of foods</h3>
           </div>
-          <button>➕</button>
+          </Link>
+          <Link to={`meal/${meal}/search`}>
+            <button>➕</button>
+          </Link>
         </div>
         <div className="mealbar-bottom">
           <h2>{totalCal} Calories</h2>
         </div>
-      </Link>
     </div>
   );
 }
