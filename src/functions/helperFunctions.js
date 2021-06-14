@@ -50,7 +50,7 @@ const updateNutrientInfo = (data, meal, nutrientName, amount, percent, operator)
   newData.meals[meal].nutrients = newData.meals[meal].nutrients.map((obj) => {
     if (obj.name === nutrientName) {
       obj.amount = (operator==="add"? obj.amount + amount : obj.amount - amount);
-      if (obj.percentOfDailyNeeds){
+      if (obj.percentOfDailyNeeds !== undefined){
         obj.percentOfDailyNeeds = (operator==="add"? obj.percentOfDailyNeeds + percent : obj.percentOfDailyNeeds - percent);
       }
     }
@@ -59,7 +59,7 @@ const updateNutrientInfo = (data, meal, nutrientName, amount, percent, operator)
   newData.nutrients = newData.nutrients.map(obj => {
     if (obj.name === nutrientName) {
       obj.amount = (operator==="add" ? obj.amount + amount : obj.amount - amount);
-      if (obj.percentOfDailyNeeds){
+      if (obj.percentOfDailyNeeds!== undefined){
         obj.percentOfDailyNeeds = (operator==="add" ? obj.percentOfDailyNeeds + percent : obj.percentOfDailyNeeds + percent);
       }
     }
