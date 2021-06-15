@@ -6,7 +6,7 @@ import ProgressCircle from '../components/ProgressCircle';
 import firebase from '../firebase';
 import {dataFrame} from '../functions/constants';
 import DataList from '../components/DataList.js';
-import {PrimaryButton} from '../stylesheets/styledComponents';
+import {PrimaryButton, BackArrowDiv} from '../stylesheets/styledComponents';
 import MealFoodBar from '../components/MealFoodBar';
 
 const Meal = (props) => {
@@ -98,11 +98,11 @@ const Meal = (props) => {
         <DataList data={data} goal={goal}/>
       </div>
 
-      <div className="page-meal-back-div">
+      <BackArrowDiv>
         <Link to="/lifesum-clone">
           <h2>⬅</h2>
         </Link>
-      </div>
+      </BackArrowDiv>
     </div>
   );
 }

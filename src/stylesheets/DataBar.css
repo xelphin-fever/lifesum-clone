@@ -14,6 +14,7 @@
 }
 .databar-bottom{
   margin-top: 50px;
+  align-self: center;
 
 }
 .databar-data{
@@ -29,4 +30,9 @@
 .databar-data h3{
   font-size: 25px;
   margin: 5px 0;
+}
+
+.databar-button{
+  margin-top: 50px;
+  padding: 10px 20px;
 }

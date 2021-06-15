@@ -85,6 +85,15 @@ const PrimaryButton = styled.div`
   }
 `;
 
+const BackArrowDiv = styled.div`
+  position: absolute;
+  top: 0;
+  left: 50px;
+  color: var(--primary-letter);
+  font-size: 40px;
+  z-index: 12;
+`;
 
 
-export {Dropdown, DropdownElement, MessageDiv, PrimaryButton};
+
+export {Dropdown, DropdownElement, MessageDiv, PrimaryButton, BackArrowDiv};

@@ -3,7 +3,7 @@ import '../stylesheets/Food.css';
 import {Link, useRouteMatch} from "react-router-dom";
 import {foodFrame, dataFrame} from '../functions/constants';
 import {formatDate, findNutrient, addFood} from '../functions/helperFunctions';
-import {Dropdown, DropdownElement, MessageDiv , PrimaryButton} from '../stylesheets/styledComponents';
+import {Dropdown, DropdownElement, MessageDiv , PrimaryButton, BackArrowDiv} from '../stylesheets/styledComponents';
 import ProgressCircle from '../components/ProgressCircle';
 import firebase from '../firebase';
 
@@ -166,6 +166,12 @@ const Food = (props) => {
           <PrimaryButton onClick={trackFood}>Track Food</PrimaryButton>
         </Link>
       </div>
+
+      <BackArrowDiv>
+        <Link to={`/meal/${meal}/search`}>
+          <h2>⬅</h2>
+        </Link>
+      </BackArrowDiv>
     </div>
   );
 }

@@ -22,7 +22,7 @@ const MealFoodBar = (props) => {
         }
         <div className="foodbar-text">
           <h2>{capitalize(props.food.name)}</h2>
-          <h3>{findNutrient(props.food, "Calories").amount}cal  ⚫ {props.food.quantity}{props.food.unit}</h3>
+          <h3>{findNutrient(props.food, "Calories").amount}cal  ⚫ {props.food.amount}{props.food.unit}</h3>
         </div>
       </div>
       <button onClick={() => removeFood()}>-</button>

@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react';
 // import styled from 'styled-components'
 import '../stylesheets/DataBar.css'
-import ProgressCircle from './ProgressCircle'
-import firebase from '../firebase';
-import { LinearProgress } from '@material-ui/core';
-import {findNutrientData} from '../functions/helperFunctions'
+import ProgressCircle from './ProgressCircle';
+import {Link} from "react-router-dom";
 
 const DataBar = (props) => {
 
-  const [goal, setGoal] = useState(1250); // TODO: Create Firestore Users -> [uid] -> Config -> config : has goal
+  const [goal, setGoal] = useState(1400); // TODO: Create Firestore Users -> [uid] -> Config -> config : has goal
   const [eaten, setEaten] = useState(0);
   const [burnt, setBurnt] = useState(0);
 
@@ -79,6 +77,9 @@ const DataBar = (props) => {
           <h3>{props.data.sumFat}g</h3>
         </div>
       </div>
+      <Link to={`/datasheet`}>
+        <button className="databar-button">📊 Nutrient Data</button>
+      </Link>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import Meal from './pages/Meal';
 import Search from './pages/Search';
 import Food from './pages/Food';
 import SignIn from './pages/SignIn';
+import DataSheet from './pages/DataSheet';
 import {dateReducer, resultsReducer} from './functions/reducers';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route exact path='/lifesum-clone/signin' component={() => <SignIn/>}/>
           <Route exact path='/meal/:id/search' component={() => <Search date={stateDate.date} results={stateResults.results} dispatchResults={dispatchResults}/>}/>
           <Route exact path='/meal/:id/search/:id' component={() => <Food date={stateDate.date}/>}/>
+          <Route exact path='/datasheet' component={() => <DataSheet date={stateDate.date}/>}/>
         </Switch>
       </Router>
     </div>
