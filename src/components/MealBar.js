@@ -37,13 +37,13 @@ const MealBar = (props) => {
       
         <div className="mealbar-top">
           <h2 className="mealbar-emoji">{options[meal].emoji}</h2>
-          <Link to={`lifesum-clone/meal/${meal}`}>
+          <Link to={`/lifesum-clone/meal/${meal}`}>
           <div className="mealbar-text">
             <h2>{options[meal].title}</h2>
             <h3>Here I'll write down a list of foods</h3>
           </div>
           </Link>
-          <Link to={`lifesum-clone/meal/${meal}/search`}>
+          <Link to={`/lifesum-clone/meal/${meal}/search`}>
             <button>➕</button>
           </Link>
         </div>
