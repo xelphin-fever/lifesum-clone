@@ -3,10 +3,19 @@ import React from 'react';
 
 const DateChanger = (props) => {
 
+  const changeDate = (event) => {
+    const newDate = new Date(event.currentTarget.value);
+    newDate.setDate(newDate.getDate() + 1);
+    props.dispatchDate({type: 'update', payload: newDate});
+  }
+
   return (
     <div  className="datechanger">
       <button onClick={() => props.dispatchDate({type: 'decrement'})}>⬅</button>
-      <h1>{props.date}</h1>
+      <div>
+        <h1>{props.date}</h1>
+        <input type="date" id="datechanger-date" onChange={changeDate}/>
+      </div>
       <button  onClick={() => props.dispatchDate({type: 'increment'})}>➡</button>
     </div>
   );

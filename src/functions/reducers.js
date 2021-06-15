@@ -15,6 +15,8 @@ function dateReducer (state, action) {
       return {date: dDate};
     case 'reload':
       return {date: state.date};
+    case 'update':
+      return {date: action.payload}
     default:
       throw new Error();
   }
