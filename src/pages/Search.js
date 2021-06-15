@@ -5,7 +5,7 @@ import {capitalize} from "../functions/helperFunctions";
 import FoodBar from '../components/FoodBar'
 
 const Search = (props) => {
-  let meal = useRouteMatch('/lifesum-clone/meal/:id/search').url.split('/');
+  let meal = useRouteMatch('/meal/:id/search').url.split('/');
   meal=meal[meal.length-2];
   // console.log('date: ', props.date);
   const [search, setSearch] = useState('');
@@ -54,7 +54,7 @@ const Search = (props) => {
     <div  className="page-search">
       <div className="page-search-top">
         <div className="page-search-nav">
-          <Link to={`/lifesum-clone/meal/${meal}`}>
+          <Link to={`/meal/${meal}`}>
             <button>⬅</button>
           </Link>
           <h2>{capitalize(meal)}</h2>

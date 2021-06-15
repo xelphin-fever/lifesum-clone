@@ -9,7 +9,7 @@ import DataList from '../components/DataList.js';
 import {PrimaryButton} from '../stylesheets/styledComponents';
 
 const Meal = (props) => {
-  let meal = useRouteMatch('/lifesum-clone/meal/:id').url.split('/');
+  let meal = useRouteMatch('/meal/:id').url.split('/');
   meal=meal[meal.length-1];
   // TODO: Listen to firestore change, update props
   const [goal, setGoal] = useState(400); // TODO: make config collection in firestore for each user and there have the goals
