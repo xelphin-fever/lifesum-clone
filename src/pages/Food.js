@@ -8,7 +8,7 @@ import ProgressCircle from '../components/ProgressCircle';
 import firebase from '../firebase';
 
 const Food = (props) => {
-  const link = useRouteMatch('/meal/:id/search/:id').url.split('/');
+  const link = useRouteMatch('/lifesum-clone/meal/:id/search/:id').url.split('/');
   console.log('link is: ', link);
   const foodId=link[link.length-1];
   let meal = link[link.length-3];
@@ -152,7 +152,7 @@ const Food = (props) => {
       </div>
 
       <div className="page-food-trackDiv">
-        <Link to={`/meal/${meal}`}>
+        <Link to={`/lifesum-clone/meal/${meal}`}>
           <PrimaryButton onClick={trackFood}>Track Food</PrimaryButton>
         </Link>
       </div>

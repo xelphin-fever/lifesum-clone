@@ -12,7 +12,7 @@ const FoodBar = (props) => {
 
   return (
     <div  className="foodbar">
-      <Link to={`/meal/${props.meal}/search/${getNumId(props.id)}`}>
+      <Link to={`/lifesum-clone/meal/${props.meal}/search/${getNumId(props.id)}`}>
       <div className="foodbar-left">
         {
           props.imgSrc ? <img src={props.imgSrc} alt={props.title} /> : null
