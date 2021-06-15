@@ -39,8 +39,8 @@ const updateBasicInfo = (data, meal, type, amount, operator) => {
   // type: "sumCal" || "sumFat" || ...
   // amount: [number]
   let newData = {...data};
-  newData.meals[meal][type] = (operator==="add" ? newData.meals[meal][type] + amount : newData.meals[meal][type] - amount);
-  newData[type] = (operator==="add" ? newData[type] + amount : newData[type] - amount);
+  newData.meals[meal][type] = Math.round(operator==="add" ? newData.meals[meal][type] + amount : newData.meals[meal][type] - amount);
+  newData[type] = Math.round(operator==="add" ? newData[type] + amount : newData[type] - amount);
   return newData;
 }
 
@@ -49,18 +49,18 @@ const updateNutrientInfo = (data, meal, nutrientName, amount, percent, operator)
   let newData = {...data};
   newData.meals[meal].nutrients = newData.meals[meal].nutrients.map((obj) => {
     if (obj.name === nutrientName) {
-      obj.amount = (operator==="add"? obj.amount + amount : obj.amount - amount);
+      obj.amount = Math.round(operator==="add"? obj.amount + amount : obj.amount - amount);
       if (obj.percentOfDailyNeeds !== undefined){
-        obj.percentOfDailyNeeds = (operator==="add"? obj.percentOfDailyNeeds + percent : obj.percentOfDailyNeeds - percent);
+        obj.percentOfDailyNeeds = Math.round(operator==="add"? obj.percentOfDailyNeeds + percent : obj.percentOfDailyNeeds - percent);
       }
     }
     return obj;
   });
   newData.nutrients = newData.nutrients.map(obj => {
     if (obj.name === nutrientName) {
-      obj.amount = (operator==="add" ? obj.amount + amount : obj.amount - amount);
+      obj.amount = Math.round(operator==="add" ? obj.amount + amount : obj.amount - amount);
       if (obj.percentOfDailyNeeds!== undefined){
-        obj.percentOfDailyNeeds = (operator==="add" ? obj.percentOfDailyNeeds + percent : obj.percentOfDailyNeeds + percent);
+        obj.percentOfDailyNeeds = Math.round(operator==="add" ? obj.percentOfDailyNeeds + percent : obj.percentOfDailyNeeds + percent);
       }
     }
     return obj;

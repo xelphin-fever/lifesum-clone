@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import '../stylesheets/Food.css';
 import {Link, useRouteMatch} from "react-router-dom";
-import {foodFrame} from '../functions/constants';
+import {foodFrame, dataFrame} from '../functions/constants';
 import {formatDate, findNutrient, addFood} from '../functions/helperFunctions';
 import {Dropdown, DropdownElement, MessageDiv , PrimaryButton} from '../stylesheets/styledComponents';
 import ProgressCircle from '../components/ProgressCircle';
@@ -17,9 +17,27 @@ const Food = (props) => {
   console.log('The date is: ', formatDate(props.date));
   //
   const [result, setResult] = useState(foodFrame);
+  const [data, setData] = useState(dataFrame);
   const [amount, setAmount] = useState(1);
   const [unit, setUnit] = useState("g");
   const [macrosPer, setMacrosPer] = useState([["protein",30], ["fat",20], ["carbs", 50]]);
+
+
+  // GET DATA
+  useEffect(() => {
+    let firestore = firebase.firestore();
+    const usersRef = firestore.collection('users').doc(firebase.auth().currentUser.uid).collection('days').doc(formatDate(props.date))
+    usersRef.get()
+      .then((docSnapshot) => {
+        if (docSnapshot.exists) {
+          usersRef.onSnapshot((doc) => {
+            setData(doc.data());
+          });
+        } else {
+          console.log('the doc was not found, need to create it');
+        }
+    });
+  }, [props.date])
 
   // LISTEN FOR 'ENTER' EVENT AND UPDATE AMOUNT INPUT
   useEffect(() => {
@@ -40,8 +58,21 @@ const Food = (props) => {
 
   // COLLECT RESULT FROM API
   useEffect(() => {
+    let isCancelled = false;
     console.log('Amount is now: ', amount, '. Unit is: ', unit);
-  }, [amount, unit]);
+    async function fetchResults() {
+      let response = await fetch(`https://api.spoonacular.com/food/ingredients/${foodId}/information?apiKey=${process.env.REACT_APP_SPOONACULAR_API_KEY}&amount=${amount}&unit=${unit}`);
+      let data = await response.json();
+      if (isCancelled === false){
+        console.log('Result Food: ', data);
+        setResult(data);
+      }      
+    }
+    fetchResults();
+    
+    return () => isCancelled=true;
+  }, [amount, unit, foodId]);
+
 
   // UPDATE VARIABLES ON RESULT CHANGE
   useEffect(() => {
@@ -50,27 +81,18 @@ const Food = (props) => {
     setMacrosPer([["protein",myMacros.percentProtein], ["fat",myMacros.percentFat], ["carbs", myMacros.percentCarbs]]);
   }, [result])
 
+
   // TRACK FOOD
-  
-  //
   const trackFood = () => {
-    // TODO: Check for Sign In (if not timeout for 0.3s and try again maybe)
-    let firestore = firebase.firestore();
-    const usersRef = firestore.collection('users').doc(firebase.auth().currentUser.uid).collection('days').doc(formatDate(props.date))
-    usersRef.get()
-      .then((docSnapshot) => {
-        if (docSnapshot.exists) {
-          usersRef.onSnapshot((doc) => {
-            console.log('TRACKFOOD data: ', doc.data());
-             const newData = addFood(doc.data(), meal, result);
-             console.log('TRACKFOOD data: ',newData);
-             // TODO: Update firestore to contain 'newData' at date
-             // TODO: dispatch updateDate?
-          });
-        } else {
-          console.log('the doc was not found, need to create it');
-        }
-    });
+    // TODO: make a 'data' state variable that is the same as the firestore data (all from the date)
+    console.log('Going to Update Firestore');
+    console.log('The result being: ', result);
+    console.log('The data (before update) being: ', data);
+    const updated = addFood(data, meal, result);
+    var db = firebase.firestore();
+    db.collection('users').doc(firebase.auth().currentUser.uid).collection('days').doc(formatDate(props.date)).update(updated)
+
+    // TODO: updata 'data' OR button throws link to Meal page
   }
 
 
@@ -78,7 +100,7 @@ const Food = (props) => {
   return (
     <div  className="page-food">
       <div className="page-food-top">
-        <h2>{result.nameClean}</h2>
+        <h2>{result.name}</h2>
       </div>
 
       <div className="page-food-section">
@@ -130,7 +152,9 @@ const Food = (props) => {
       </div>
 
       <div className="page-food-trackDiv">
-        <PrimaryButton onClick={trackFood}>Track Food</PrimaryButton>
+        <Link to={`/meal/${meal}`}>
+          <PrimaryButton onClick={trackFood}>Track Food</PrimaryButton>
+        </Link>
       </div>
     </div>
   );

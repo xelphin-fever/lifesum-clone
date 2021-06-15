@@ -17,8 +17,14 @@ const Home = (props) => {
   const [data, setData] = useState(dataFrame); // FIX: also update on any updates to Doc
 
   useEffect(() => {
-    console.log('the date recorded now is: ', formatDate(props.date));
-    setDate(formatDate(props.date));
+    let isCancelled = false;
+    if (isCancelled === false){
+      console.log('the date recorded now is: ', formatDate(props.date));
+      setDate(formatDate(props.date));
+    }
+    return () => {
+      isCancelled = true;
+    };
   }, [props.date])
 
 
@@ -34,22 +40,23 @@ const Home = (props) => {
 
   // SET DATABASE
   useEffect (() => {
-    if (isSigned===true){
+    
+    if (isSigned===true ){
       console.log('(useEffect() of Home) - Am signed in');
       let firestore = firebase.firestore();
       const usersRef = firestore.collection('users').doc(firebase.auth().currentUser.uid).collection('days').doc(date)
       usersRef.get()
         .then((docSnapshot) => {
-          if (docSnapshot.exists) {
-            usersRef.onSnapshot((doc) => {
-              console.log('the doc of this date exists!', doc);
-              setData(doc.data());
-            });
-          } else {
-            console.log('the doc was not found, need to create it');
-            usersRef.set(dataFrame); // Created Doc
-            setData(dataFrame);
-          }
+            if (docSnapshot.exists) {
+              usersRef.onSnapshot((doc) => {
+                console.log('the doc of this date exists!', doc);
+                setData(doc.data());
+              });
+            } else {
+              console.log('the doc was not found, need to create it');
+              usersRef.set(dataFrame); // Created Doc
+              setData(dataFrame);
+            }
       });
     }
 
