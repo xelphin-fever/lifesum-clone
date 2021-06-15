@@ -19,9 +19,6 @@ const FoodBar = (props) => {
         }
         <div className="foodbar-text">
           <h2>{capitalize(props.title)}</h2>
-          {
-            props.calories ? <h3>{props.calories}cal  ⚫  {props.quantity}</h3> : null
-          }
         </div>
       </div>
       </Link>

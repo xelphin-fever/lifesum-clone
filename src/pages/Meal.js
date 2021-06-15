@@ -7,6 +7,7 @@ import firebase from '../firebase';
 import {dataFrame} from '../functions/constants';
 import DataList from '../components/DataList.js';
 import {PrimaryButton} from '../stylesheets/styledComponents';
+import MealFoodBar from '../components/MealFoodBar';
 
 const Meal = (props) => {
   let meal = useRouteMatch('/meal/:id').url.split('/');
@@ -17,19 +18,28 @@ const Meal = (props) => {
   const [progressColor, setProgressColor] = useState({color: "white"});
   const [progress, setProgress] = useState(0);
   const [isSigned, setIsSigned] = useState(!!firebase.auth().currentUser);
+  const [allData, setAllData] = useState(dataFrame);
 
   useEffect(() => {
     // NOTE: instead of useEffect maybe listen for firestore at doc changes
+    let abortController = new AbortController();
+    let aborted = abortController.signal;
     let firestore = firebase.firestore();
-    if (firebase.auth().currentUser){
+    if (firebase.auth().currentUser && aborted!==true){
       firestore.collection("users").doc(firebase.auth().currentUser.uid).collection('days').doc(formatDate(props.date)).get().then((myDoc) => {
         console.log('MyDoc in Meal: ', myDoc)
-        setData(myDoc.data().meals[meal]);
+        if (aborted!==true){
+          setData(myDoc.data().meals[meal]);
+          setAllData(myDoc.data());
+        }
       }).catch(function (error) {
         console.error("Error in Meal: ", error);
       })
     } else {
       console.log('not logged in cannot update meal');
+    }
+    return () => {
+      abortController.abort();
     }
   }, [props.date, meal, isSigned]);
 
@@ -55,6 +65,14 @@ const Meal = (props) => {
   }, [data, goal])
 
 
+  const updatedFullData = (updatedFullData) => {
+    console.log('updated: ', updatedFullData);
+    var db = firebase.firestore();
+    db.collection('users').doc(firebase.auth().currentUser.uid).collection('days').doc(formatDate(props.date)).update(updatedFullData);
+    // dispatch 'date' update?
+    props.dispatchDate({type: 'reload'});
+  }
+
 
   return (
     <div  className="page-meal">
@@ -69,7 +87,11 @@ const Meal = (props) => {
         <PrimaryButton width="60%">Add Food</PrimaryButton>
       </Link>
       <div className="page-meal-foodlist">
-
+        {
+          data.foods.map((food, count) => {
+            return <MealFoodBar food={food} key={count} order={count} data={allData} meal={meal} update={updatedFullData} />
+          })
+        }
       </div>
       <div className="page-meal-datalist">
         <DataList data={data} goal={goal}/>

@@ -87,4 +87,22 @@ const addFood = (data, meal, food) => {
   return newData;
 }
 
-export {formatDate, capitalize, findNutrient, addFood}
+const deleteFood = (data, meal, food, order) => {
+  let newData = {...data};
+  newData.meals[meal].foods.splice(order, 1);
+  const basicTypes = [["sumCal","Calories"], ["sumFat","Fat"], ["sumProtein","Protein"], ["sumCarb","Carbohydrates"]];
+  basicTypes.forEach(typePair => {
+    let myNutrient = food.nutrition.nutrients.filter((nutrient) => nutrient.name === typePair[1])[0];
+    newData = updateBasicInfo(newData, meal, typePair[0], myNutrient.amount, "subtract");
+  });
+  food.nutrition.nutrients.forEach((nutrient) => {
+    newData = updateNutrientInfo(newData, meal, nutrient.name, nutrient.amount, nutrient.percentOfDailyNeeds, "subtract");
+  })
+  return newData;
+}
+
+const nothingDone = () => {
+  return 3;
+}
+
+export {formatDate, capitalize, findNutrient, addFood, deleteFood, nothingDone}

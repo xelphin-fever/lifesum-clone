@@ -64,7 +64,7 @@ const Food = (props) => {
       let response = await fetch(`https://api.spoonacular.com/food/ingredients/${foodId}/information?apiKey=${process.env.REACT_APP_SPOONACULAR_API_KEY}&amount=${amount}&unit=${unit}`);
       let data = await response.json();
       if (isCancelled === false){
-        console.log('Result Food: ', data);
+        console.log('Result Food: ', data); // FIX: yikes! 'data' is written as a const outside 
         setResult(data);
       }      
     }

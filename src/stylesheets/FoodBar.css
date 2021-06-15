@@ -1,5 +1,6 @@
 .foodbar{
   width: 85%;
+  background-color: var(--primary-letter);
   box-shadow: 8px 8px var(--light-gray);
   border: 2px solid var(--gray);
   padding: 20px 40px;
@@ -31,7 +32,7 @@
 .foodbar button{
   background-color: var(--light-gray);
   border-radius: 50%;
-  padding: 10px 24px;
+  padding: 10px 38px;
   height: fit-content;
   font-size: 50px;
   right: 50px;

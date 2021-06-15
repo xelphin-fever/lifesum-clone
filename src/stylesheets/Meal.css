@@ -33,6 +33,11 @@
 .page-meal-datalist, .page-meal-foodlist{
   width: 100%;
 }
+.page-meal-foodlist{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .page-meal-back-div{
   position: absolute;
