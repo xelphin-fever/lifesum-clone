@@ -3,9 +3,10 @@ import React, {useState, useEffect} from 'react';
 import '../stylesheets/DataBar.css'
 import ProgressCircle from './ProgressCircle'
 import firebase from '../firebase';
+import { LinearProgress } from '@material-ui/core';
+import {findNutrientData} from '../functions/helperFunctions'
 
 const DataBar = (props) => {
-  // TODO: Listen for Firestore update on specific user at day, and update firestore
 
   const [goal, setGoal] = useState(1250); // TODO: Create Firestore Users -> [uid] -> Config -> config : has goal
   const [eaten, setEaten] = useState(0);
@@ -15,13 +16,10 @@ const DataBar = (props) => {
   const [caloriesLeft, setCaloriesLeft] = useState(0);
   const [progress, setProgress] = useState(0);
   const [progressColor, setProgressColor] = useState({color: "white"});
-  const [calMessage, setCalMessage] = useState("Calories Left")
-  // TODO: useEffect when props changes and setState to what's needed
+  const [calMessage, setCalMessage] = useState("Calories Left");
 
 
-  useEffect(() => { // FIX: This only changes on Date change, not on update!!!!
-    // Maybe make it listen to the change in the document directly instead of through props stateData
-    // Or, with date:reload reducer can be fired on updates so as to update this
+  useEffect(() => {
     setEaten(props.data.sumCal);
     setBurnt(props.data.sumBurnt);
   }, [props.data]);
@@ -63,22 +61,22 @@ const DataBar = (props) => {
           <ProgressCircle  progress={progress} circleSize="480" calories={caloriesLeft} message={calMessage}/>
         </div>
         <div className="databar-data">
-          <h2>{burnt}</h2>
-          <h3>Calories Burnt</h3>
+          <h2>{goal}</h2>
+          <h3>Calorie Goal</h3>
         </div>
       </div>
       <div className="databar-bottom">
         <div className="databar-data">
           <h2>Carbs</h2>
-          <h3>###</h3>
+          <h3>{props.data.sumCarb}g</h3>
         </div>
         <div className="databar-data">
           <h2>Proetein</h2>
-          <h3>###</h3>
+          <h3>{props.data.sumProtein}g</h3>
         </div>
         <div className="databar-data">
           <h2>Fat</h2>
-          <h3>###</h3>
+          <h3>{props.data.sumFat}g</h3>
         </div>
       </div>
     </div>

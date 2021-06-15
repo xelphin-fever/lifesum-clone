@@ -27,7 +27,20 @@ const findNutrient = (food, name) => {
     "unit": "cal",
     "percentOfDailyNeeds": 0
   }; 
-
+}
+const findNutrientData = (data, name) => {
+  const arrAll = data.nutrients;
+  
+  const myNutrient = arrAll.filter((nut) => nut.name === name);
+  if (myNutrient.length>0){
+    return myNutrient[0]; 
+  }
+  return {
+    "name": "Not Found",
+    "amount": 0,
+    "unit": "cal",
+    "percentOfDailyNeeds": 0
+  }; 
 }
 
 // TODO: Make function that updates the firestore data
@@ -101,8 +114,6 @@ const deleteFood = (data, meal, food, order) => {
   return newData;
 }
 
-const nothingDone = () => {
-  return 3;
-}
 
-export {formatDate, capitalize, findNutrient, addFood, deleteFood, nothingDone}
+
+export {formatDate, capitalize, findNutrient, addFood, deleteFood, findNutrientData}

@@ -83,6 +83,7 @@ const Home = (props) => {
         </div>
         
         <DateChanger date={date} dispatchDate={props.dispatchDate}/>
+        
         <div className="page-home-mealbars">
           {meals.map((meal) => <MealBar meal={meal} totalCal={data.meals[meal].sumCal} key={meal}/>)}
         </div>
