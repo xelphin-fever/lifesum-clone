@@ -25,18 +25,26 @@ const Food = (props) => {
 
   // GET DATA
   useEffect(() => {
+    let abortController = new AbortController();
+    let aborted = abortController.signal.aborted;
     let firestore = firebase.firestore();
     const usersRef = firestore.collection('users').doc(firebase.auth().currentUser.uid).collection('days').doc(formatDate(props.date))
     usersRef.get()
       .then((docSnapshot) => {
         if (docSnapshot.exists) {
           usersRef.onSnapshot((doc) => {
-            setData(doc.data());
+            aborted = abortController.signal.aborted;
+            if (aborted!==true){
+              setData(doc.data());
+            }
           });
         } else {
           console.log('the doc was not found, need to create it');
         }
     });
+    return () => {
+      abortController.abort();
+    }
   }, [props.date])
 
   // LISTEN FOR 'ENTER' EVENT AND UPDATE AMOUNT INPUT
@@ -58,19 +66,21 @@ const Food = (props) => {
 
   // COLLECT RESULT FROM API
   useEffect(() => {
-    let isCancelled = false;
+    let abortController = new AbortController();
+    let aborted = abortController.signal.aborted;
     console.log('Amount is now: ', amount, '. Unit is: ', unit);
     async function fetchResults() {
       let response = await fetch(`https://api.spoonacular.com/food/ingredients/${foodId}/information?apiKey=${process.env.REACT_APP_SPOONACULAR_API_KEY}&amount=${amount}&unit=${unit}`);
       let data = await response.json();
-      if (isCancelled === false){
+      aborted = abortController.signal.aborted;
+      if (aborted === false){
         console.log('Result Food: ', data); // FIX: yikes! 'data' is written as a const outside 
         setResult(data);
       }      
     }
     fetchResults();
     
-    return () => isCancelled=true;
+    return () => {abortController.abort();};
   }, [amount, unit, foodId]);
 
 

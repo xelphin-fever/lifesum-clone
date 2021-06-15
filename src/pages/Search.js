@@ -31,13 +31,16 @@ const Search = (props) => {
 
   // COLLECT RESULTS FROM API
   useEffect(() => {
-    let isCancelled = false;
+    let abortController = new AbortController();
+    let aborted = abortController.signal.aborted;
     if (search!==''){
       console.log('Going to fetch API info for: ',search);
       async function fetchResults() {
         let response = await fetch(`https://api.spoonacular.com/food/ingredients/search?apiKey=${process.env.REACT_APP_SPOONACULAR_API_KEY}&query=${search}&number=25`);
         let data = await response.json();
-        if (isCancelled === false) {
+        aborted = abortController.signal.aborted;
+        console.log("Search abort signal is: ", aborted);
+        if (aborted === false) {
           console.log('Results: ', data);
           props.dispatchResults({type: 'update', payload: data.results});
         }
@@ -45,7 +48,8 @@ const Search = (props) => {
       fetchResults();
     }
     return () => {
-      isCancelled = true;
+      console.log("Search has been aborted");
+      abortController.abort();
     };
   }, [search])
 
