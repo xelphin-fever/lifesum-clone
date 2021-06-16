@@ -22,7 +22,6 @@ const Home = (props) => {
     let abortController = new AbortController();
     let aborted = abortController.signal.aborted;
     if (aborted === false){
-      console.log('the date recorded now is: ', formatDate(props.date));
       setDate(formatDate(props.date));
     }
     return () => {
@@ -34,7 +33,6 @@ const Home = (props) => {
 
   // SET SIGNED STATUS
   firebase.auth().onAuthStateChanged(() => {
-    console.log('(auth state change) - Signed in ', !!firebase.auth().currentUser);
     setIsSigned(!!firebase.auth().currentUser);
   });
   const setSigned = (ans) => {
@@ -46,21 +44,19 @@ const Home = (props) => {
     let abortController = new AbortController();
     let aborted = abortController.signal.aborted;
     if (isSigned===true ){
-      console.log('(useEffect() of Home) - Am signed in');
       let firestore = firebase.firestore();
       const usersRef = firestore.collection('users').doc(firebase.auth().currentUser.uid).collection('days').doc(date)
       usersRef.get()
         .then((docSnapshot) => {
             if (docSnapshot.exists) {
               usersRef.onSnapshot((doc) => {
-                console.log('the doc of this date exists!', doc);
                 aborted = abortController.signal.aborted;
                 if (aborted===false){
                   setData(doc.data());
                 }
               });
             } else {
-              console.log('the doc was not found, need to create it');
+              // console.log('the doc was not found, creating it');
               usersRef.set(dataFrame); // Created Doc
               aborted = abortController.signal.aborted;
               if (aborted===false){

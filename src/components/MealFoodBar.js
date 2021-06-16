@@ -8,9 +8,7 @@ const MealFoodBar = (props) => {
   const baseSrc = "https://spoonacular.com/cdn/ingredients_100x100/";
 
   const removeFood = () => {
-    console.log('original data: ', props.data);
     const updated = deleteFood(props.data, props.meal, props.food, props.order);
-    console.log('updated data: ', updated);
     props.update(updated);
   }
 

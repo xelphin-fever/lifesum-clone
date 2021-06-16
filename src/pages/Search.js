@@ -7,7 +7,6 @@ import FoodBar from '../components/FoodBar'
 const Search = (props) => {
   let meal = useRouteMatch('/meal/:id/search').url.split('/');
   meal=meal[meal.length-2];
-  // console.log('date: ', props.date);
   const [search, setSearch] = useState('');
   const baseSrc = "https://spoonacular.com/cdn/ingredients_100x100/";
 
@@ -17,13 +16,11 @@ const Search = (props) => {
     const pressedEnter = (event) => {
       if (event.keyCode === 13) {
         event.preventDefault();
-        console.log('clicked on enter from input, value:', input.value);
         setSearch(input.value);
       }
     }
     input.addEventListener("keyup", pressedEnter);
     return () => {
-      console.log('Search Enter: removing event listener...');
       return input.removeEventListener("keyup", pressedEnter);
     };
   }, []);
@@ -34,21 +31,17 @@ const Search = (props) => {
     let abortController = new AbortController();
     let aborted = abortController.signal.aborted;
     if (search!==''){
-      console.log('Going to fetch API info for: ',search);
       async function fetchResults() {
         let response = await fetch(`https://api.spoonacular.com/food/ingredients/search?apiKey=${process.env.REACT_APP_SPOONACULAR_API_KEY}&query=${search}&number=25`);
         let data = await response.json();
         aborted = abortController.signal.aborted;
-        console.log("Search abort signal is: ", aborted);
         if (aborted === false) {
-          console.log('Results: ', data);
           props.dispatchResults({type: 'update', payload: data.results});
         }
       }
       fetchResults();
     }
     return () => {
-      console.log("Search has been aborted");
       abortController.abort();
     };
   }, [search])

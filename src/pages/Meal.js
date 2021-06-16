@@ -27,7 +27,6 @@ const Meal = (props) => {
     let firestore = firebase.firestore();
     if (firebase.auth().currentUser && aborted!==true){
       firestore.collection("users").doc(firebase.auth().currentUser.uid).collection('days').doc(formatDate(props.date)).get().then((myDoc) => {
-        console.log('MyDoc in Meal: ', myDoc)
         aborted = abortController.signal.aborted;
         if (aborted!==true){
           setData(myDoc.data().meals[meal]);
@@ -66,7 +65,6 @@ const Meal = (props) => {
 
 
   const updatedFullData = (updatedFullData) => {
-    console.log('updated: ', updatedFullData);
     var db = firebase.firestore();
     db.collection('users').doc(firebase.auth().currentUser.uid).collection('days').doc(formatDate(props.date)).update(updatedFullData);
     props.dispatchDate({type: 'reload'});

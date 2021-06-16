@@ -18,7 +18,6 @@ const DataSheet = (props) => {
     let firestore = firebase.firestore();
     if (firebase.auth().currentUser && aborted!==true){
       firestore.collection("users").doc(firebase.auth().currentUser.uid).collection('days').doc(formatDate(props.date)).get().then((myDoc) => {
-        console.log('MyDoc in Meal: ', myDoc)
         aborted = abortController.signal.aborted;
         if (aborted!==true){
           setData(myDoc.data());

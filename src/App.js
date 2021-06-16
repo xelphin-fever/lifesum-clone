@@ -24,7 +24,6 @@ function App() {
 
   // SET SIGNED STATUS
   firebase.auth().onAuthStateChanged(() => {
-    console.log('App - Signed in ', !!firebase.auth().currentUser);
     setIsSigned(!!firebase.auth().currentUser);
   });
 
@@ -39,14 +38,12 @@ function App() {
         .then((docSnapshot) => {
             if (docSnapshot.exists) {
               usersRef.onSnapshot((doc) => {
-                console.log('the Config exists and is', doc.data());
                 aborted = abortController.signal.aborted;
                 if (aborted===false){
                   dispatchConfig({type: 'update', payload: doc.data() })
                 }
               });
             } else {
-              console.log('the Config was not found, need to create it');
               usersRef.set(defaultConfigure); // Create Doc with Default
             }
       });

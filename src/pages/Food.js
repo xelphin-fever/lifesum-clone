@@ -9,12 +9,8 @@ import firebase from '../firebase';
 
 const Food = (props) => {
   const link = useRouteMatch('/meal/:id/search/:id').url.split('/');
-  console.log('link is: ', link);
   const foodId=link[link.length-1];
   let meal = link[link.length-3];
-  console.log('The ID of the food is: ',foodId);
-  console.log('The meal is: ', meal);
-  console.log('The date is: ', formatDate(props.date));
   //
   const [result, setResult] = useState(foodFrame);
   const [data, setData] = useState(dataFrame);
@@ -39,7 +35,7 @@ const Food = (props) => {
             }
           });
         } else {
-          console.log('the doc was not found, need to create it');
+          console.log('the doc was not found, needs to be create it');
         }
     });
     return () => {
@@ -54,7 +50,6 @@ const Food = (props) => {
     const pressedEnter = (event) => {
       if (event.keyCode === 13) {
         event.preventDefault();
-        console.log('clicked on enter from input, value:', input.value);
         setAmount(input.value);
       }
     }
@@ -68,14 +63,12 @@ const Food = (props) => {
   useEffect(() => {
     let abortController = new AbortController();
     let aborted = abortController.signal.aborted;
-    console.log('Amount is now: ', amount, '. Unit is: ', unit);
     async function fetchResults() {
       let response = await fetch(`https://api.spoonacular.com/food/ingredients/${foodId}/information?apiKey=${process.env.REACT_APP_SPOONACULAR_API_KEY}&amount=${amount}&unit=${unit}`);
-      let data = await response.json();
+      let myData = await response.json();
       aborted = abortController.signal.aborted;
       if (aborted === false){
-        console.log('Result Food: ', data); // FIX: yikes! 'data' is written as a const outside 
-        setResult(data);
+        setResult(myData);
       }      
     }
     fetchResults();
@@ -87,22 +80,15 @@ const Food = (props) => {
   // UPDATE VARIABLES ON RESULT CHANGE
   useEffect(() => {
     const myMacros = result.nutrition.caloricBreakdown;
-    console.log('Protein: ', myMacros.percentProtein)
     setMacrosPer([["protein",myMacros.percentProtein], ["fat",myMacros.percentFat], ["carbs", myMacros.percentCarbs]]);
   }, [result])
 
 
   // TRACK FOOD
   const trackFood = () => {
-    // TODO: make a 'data' state variable that is the same as the firestore data (all from the date)
-    console.log('Going to Update Firestore');
-    console.log('The result being: ', result);
-    console.log('The data (before update) being: ', data);
     const updated = addFood(data, meal, result);
     var db = firebase.firestore();
     db.collection('users').doc(firebase.auth().currentUser.uid).collection('days').doc(formatDate(props.date)).update(updated)
-
-    // TODO: updata 'data' OR button throws link to Meal page
   }
 
 

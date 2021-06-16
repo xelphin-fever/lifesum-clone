@@ -88,9 +88,6 @@ const DataBar = (props) => {
     setMacrosLeft(copyMacrosLeft);
     setProgressMacro(copyMacrosProg);
     setMacroMessage(copyMacroMessage);
-    console.log('Color of Macro: ', progColorCopy );
-    console.log('Left of Macro: ', copyMacrosLeft );
-    console.log('Progress of Macro: ', copyMacrosProg );
     
   }, [eatenMacros, goalMacro])
 
