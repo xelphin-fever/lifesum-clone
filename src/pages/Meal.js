@@ -13,7 +13,7 @@ const Meal = (props) => {
   let meal = useRouteMatch('/meal/:id').url.split('/');
   meal=meal[meal.length-1];
   // TODO: Listen to firestore change, update props
-  const [goal, setGoal] = useState(400); // TODO: make config collection in firestore for each user and there have the goals
+  const goal = Math.round((props.config.goalCal)/3);
   const [data, setData] = useState(dataFrame.meals[meal]);
   const [progressColor, setProgressColor] = useState({color: "white"});
   const [progress, setProgress] = useState(0);
@@ -70,7 +70,6 @@ const Meal = (props) => {
     console.log('updated: ', updatedFullData);
     var db = firebase.firestore();
     db.collection('users').doc(firebase.auth().currentUser.uid).collection('days').doc(formatDate(props.date)).update(updatedFullData);
-    // dispatch 'date' update?
     props.dispatchDate({type: 'reload'});
   }
 

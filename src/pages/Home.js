@@ -7,6 +7,8 @@ import '../stylesheets/Home.css';
 import firebase from '../firebase';
 import {formatDate} from '../functions/helperFunctions';
 import {dataFrame} from '../functions/constants';
+import { Link } from "react-router-dom";
+import {defaultConfigure} from '../functions/constants';
 
 const Home = (props) => {
   // TODO: Listen to firestore change, update props
@@ -74,18 +76,25 @@ const Home = (props) => {
 
 
 
+
+
   if (isSigned){
     return (
       <div  className="page-home">
         <div className="page-home-top">
           <button onClick={() => {firebase.auth().signOut()}}>Sign Out</button>
-          <DataBar date={date} data={data}/>
+          <DataBar date={date} data={data} config={props.config}/>
         </div>
         
         <DateChanger date={date} dispatchDate={props.dispatchDate}/>
         
         <div className="page-home-mealbars">
           {meals.map((meal) => <MealBar meal={meal} totalCal={data.meals[meal].sumCal} key={meal}/>)}
+        </div>
+        <div className="page-home-configure">
+          <Link to="/configure">
+            <button>⚙️</button>
+          </Link>
         </div>
       </div>
     );

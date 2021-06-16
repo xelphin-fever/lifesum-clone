@@ -239,182 +239,7 @@ const foodFrame = {
   "image": "imgFile",
   "meta": [],
   "nutrition": {
-      "nutrients": [
-        {
-            "name": "Calories",
-            "amount": 170,
-            "unit": "cal",
-            "percentOfDailyNeeds": 10
-        },
-        {
-            "name": "Fat",
-            "amount": 13,
-            "unit": "g",
-            "percentOfDailyNeeds": 3
-        },
-        {
-            "name": "Saturated Fat",
-            "amount": 11,
-            "unit": "g",
-            "percentOfDailyNeeds": 50
-        },
-        {
-            "name": "Carbohydrates",
-            "amount": 56,
-            "unit": "g",
-            "percentOfDailyNeeds": 8
-        },
-        {
-            "name": "Net Carbohydrates",
-            "amount": 0,
-            "unit": "g",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Sugar",
-            "amount": 32,
-            "unit": "g",
-            "percentOfDailyNeeds": 60
-        },
-        {
-            "name": "Cholesterol",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Sodium",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Protein",
-            "amount": 23,
-            "unit": "g",
-            "percentOfDailyNeeds": 30
-        },
-        {
-            "name": "Vitamin C",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Manganese",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Fiber",
-            "amount": 0,
-            "unit": "g",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Vitamin B6",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Copper",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Vitamin B1",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Folate",
-            "amount": 0,
-            "unit": "µg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Potassium",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Magnesium",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Vitamin B3",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Vitamin B5",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Vitamin B2",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Iron",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Calcium",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Vitamin A",
-            "amount": 0,
-            "unit": "IU",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Zinc",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Phosphorus",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Vitamin K",
-            "amount": 0,
-            "unit": "µg",
-            "percentOfDailyNeeds": 0
-        },
-        {
-            "name": "Selenium",
-            "amount": 0,
-            "unit": "µg",
-            "percentOfDailyNeeds":0
-        },
-        {
-            "name": "Vitamin E",
-            "amount": 0,
-            "unit": "mg",
-            "percentOfDailyNeeds": 0
-        }
-    ],
+      "nutrients": nutritionFrame,
       "caloricBreakdown": {
           "percentProtein": 30,
           "percentFat": 20,
@@ -427,8 +252,14 @@ const foodFrame = {
   }
 }
 
+const defaultConfigure = {
+    goalCal: 1800,
+    goalFat: 50,
+    goalProtein: 80,
+    goalCarb: 200,
+}
 
 
 // TODO: make constant for user config
 
-export {dataFrame, foodFrame};
+export {dataFrame, foodFrame, defaultConfigure};

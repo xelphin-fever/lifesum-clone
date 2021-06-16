@@ -42,5 +42,16 @@ function resultsReducer (state, action) {
   }
 }
 
+// CHANGE CONFIGURATION
 
-export {dateReducer, dataReducer, resultsReducer};
+function configReducer (state, action) {
+  switch (action.type) {
+    case 'update':
+      return {config: action.payload}
+    default:
+      throw new Error();
+  }
+}
+
+
+export {dateReducer, dataReducer, resultsReducer, configReducer};

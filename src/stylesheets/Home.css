@@ -30,3 +30,21 @@ button{
 .page-home-mealbars{
   padding: 50px 60px;
 }
+
+.page-home-configure{
+  position: absolute;
+  top: 0;
+  right: 50px;
+}
+.page-home-configure button{
+  font-size: 80px;
+  color: white;
+  transition: 0.2s all linear;
+}
+.page-home-configure button:hover{
+  transform: rotate(30deg);
+}
+.page-home-configure button:focus{
+  border: none;
+  outline: none;
+}

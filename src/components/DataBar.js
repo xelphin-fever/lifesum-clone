@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 
 const DataBar = (props) => {
 
-  const [goal, setGoal] = useState(1400); // TODO: Create Firestore Users -> [uid] -> Config -> config : has goal
+  const [goal, setGoal] = useState(props.config.goalCal); 
   const [eaten, setEaten] = useState(0);
   const [burnt, setBurnt] = useState(0);
 
@@ -21,6 +21,9 @@ const DataBar = (props) => {
     setEaten(props.data.sumCal);
     setBurnt(props.data.sumBurnt);
   }, [props.data]);
+  useEffect(()=> {
+    setGoal(props.config.goalCal);
+  }, [props.config])
 
 
 
