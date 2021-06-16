@@ -13,7 +13,7 @@ const Meal = (props) => {
   let meal = useRouteMatch('/meal/:id').url.split('/');
   meal=meal[meal.length-1];
   // TODO: Listen to firestore change, update props
-  const goal = Math.round((props.config.goalCal)/3);
+  const goalCal = Math.round((props.config.goalCal)/3);
   const [data, setData] = useState(dataFrame.meals[meal]);
   const [progressColor, setProgressColor] = useState({color: "white"});
   const [progress, setProgress] = useState(0);
@@ -47,23 +47,22 @@ const Meal = (props) => {
   firebase.auth().onAuthStateChanged(() => {
     setIsSigned(!!firebase.auth().currentUser);
   });
-  // TODO: make a 'doc change' lister as well?
 
 
   useEffect(() => {
-    let calc = Math.round((data.sumCal/goal)*100);
+    let calc = Math.round((data.sumCal/goalCal)*100);
     if (calc>100){
       calc = calc % 100;
-      setProgressColor({color: "rgb(226, 190, 113)"})
+      setProgressColor({color: "rgb(245, 235, 146)"})
     } else {
       setProgressColor({color: "white"})
     }
     if (calc>200){
       calc= 100;
-      setProgressColor({color: "rgb(219, 138, 105)"})
+      setProgressColor({color: "rgb(245, 235, 146)"})
     }
     setProgress(calc);
-  }, [data, goal])
+  }, [data, goalCal])
 
 
   const updatedFullData = (updatedFullData) => {
@@ -94,7 +93,7 @@ const Meal = (props) => {
         }
       </div>
       <div className="page-meal-datalist">
-        <DataList data={data} goal={goal}/>
+        <DataList data={data} goal={goalCal}/>
       </div>
 
       <BackArrowDiv>
