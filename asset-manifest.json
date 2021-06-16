@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/lifesum-clone/static/css/main.b6478222.chunk.css",
-    "main.js": "/lifesum-clone/static/js/main.3611ec35.chunk.js",
-    "main.js.map": "/lifesum-clone/static/js/main.3611ec35.chunk.js.map",
+    "main.js": "/lifesum-clone/static/js/main.312f6f0a.chunk.js",
+    "main.js.map": "/lifesum-clone/static/js/main.312f6f0a.chunk.js.map",
     "runtime-main.js": "/lifesum-clone/static/js/runtime-main.cbe1d9e4.js",
     "runtime-main.js.map": "/lifesum-clone/static/js/runtime-main.cbe1d9e4.js.map",
     "static/js/2.db19d84c.chunk.js": "/lifesum-clone/static/js/2.db19d84c.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.cbe1d9e4.js",
     "static/js/2.db19d84c.chunk.js",
     "static/css/main.b6478222.chunk.css",
-    "static/js/main.3611ec35.chunk.js"
+    "static/js/main.312f6f0a.chunk.js"
   ]
 }
