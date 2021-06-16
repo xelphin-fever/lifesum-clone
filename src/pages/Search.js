@@ -9,6 +9,7 @@ const Search = (props) => {
   meal=meal[meal.length-2];
   const [search, setSearch] = useState('');
   const baseSrc = "https://spoonacular.com/cdn/ingredients_100x100/";
+  const myDispatchResults = props.dispatchResults;
 
   // LISTEN FOR 'ENTER' EVENT AND UPDATE SEARCH INPUT
   useEffect(() => {
@@ -36,7 +37,7 @@ const Search = (props) => {
         let data = await response.json();
         aborted = abortController.signal.aborted;
         if (aborted === false) {
-          props.dispatchResults({type: 'update', payload: data.results});
+          myDispatchResults({type: 'update', payload: data.results});
         }
       }
       fetchResults();
@@ -44,7 +45,7 @@ const Search = (props) => {
     return () => {
       abortController.abort();
     };
-  }, [search])
+  }, [search, myDispatchResults])
 
 
   return (

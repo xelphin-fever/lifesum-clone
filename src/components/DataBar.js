@@ -23,6 +23,8 @@ const DataBar = (props) => {
   const [progressMacroColor, setProgressMacroColor] = useState([{color: "white"}, {color: "white"}, {color: "white"}]);
   const [calMessage, setCalMessage] = useState("Calories Left");
   const [macroMessage, setMacroMessage] = useState(["Grams Left", "Grams Left", "Grams Left"]);
+  
+
 
 
   useEffect(() => {
@@ -62,6 +64,7 @@ const DataBar = (props) => {
   }, [sumCalories, goalCal]);
 
   useEffect(() => {
+    // FIX: Dependency Warning (but can't add dependency because I update them within this useEffect -> infinite)
     let copyMacrosLeft = [...macrosLeft];
     let copyMacrosProg = [...progressMacro];
     let progColorCopy = [...progressMacroColor];

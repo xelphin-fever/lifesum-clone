@@ -43,10 +43,15 @@ const Food = (props) => {
     }
   }, [props.date])
 
-  // LISTEN FOR 'ENTER' EVENT AND UPDATE AMOUNT INPUT
+  // UPDATE INPUT VALUE
   useEffect(() => {
     let input = document.getElementById("page-food-amount");
     input.value = amount;
+  }, [amount])
+
+  // LISTEN FOR 'ENTER' EVENT AND UPDATE AMOUNT INPUT
+  useEffect(() => {
+    let input = document.getElementById("page-food-amount");
     const pressedEnter = (event) => {
       if (event.keyCode === 13) {
         event.preventDefault();

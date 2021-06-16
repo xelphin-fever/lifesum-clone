@@ -8,7 +8,6 @@ import firebase from '../firebase';
 import {formatDate} from '../functions/helperFunctions';
 import {dataFrame} from '../functions/constants';
 import { Link } from "react-router-dom";
-import {defaultConfigure} from '../functions/constants';
 
 const Home = (props) => {
   // TODO: Listen to firestore change, update props

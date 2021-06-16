@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect} from 'react';
 import { Link } from "react-router-dom";
 import {PrimaryButton, BackArrowDiv} from '../stylesheets/styledComponents';
 import '../stylesheets/Configure.css';

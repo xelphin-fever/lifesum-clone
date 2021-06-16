@@ -10,6 +10,10 @@ const DataSheet = (props) => {
   const [goal, setGoal] = useState(1400);
   const [data, setData] = useState(dataFrame);
 
+  useEffect(() => {
+    setGoal(props.config.goalCal);
+  }, [props.config])
+
 
   useEffect(() => {
     // NOTE: instead of useEffect maybe listen for firestore at doc changes
@@ -18,6 +22,7 @@ const DataSheet = (props) => {
     let firestore = firebase.firestore();
     if (firebase.auth().currentUser && aborted!==true){
       firestore.collection("users").doc(firebase.auth().currentUser.uid).collection('days').doc(formatDate(props.date)).get().then((myDoc) => {
+
         aborted = abortController.signal.aborted;
         if (aborted!==true){
           setData(myDoc.data());

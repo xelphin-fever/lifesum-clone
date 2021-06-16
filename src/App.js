@@ -62,7 +62,7 @@ function App() {
           <Route exact path='/lifesum-clone/signin' component={() => <SignIn/>}/>
           <Route exact path='/meal/:id/search' component={() => <Search date={stateDate.date} results={stateResults.results} dispatchResults={dispatchResults}/>}/>
           <Route exact path='/meal/:id/search/:id' component={() => <Food date={stateDate.date}/>}/>
-          <Route exact path='/datasheet' component={() => <DataSheet date={stateDate.date}/>}/>
+          <Route exact path='/datasheet' component={() => <DataSheet date={stateDate.date} config={stateConfig.config} />}/>
           <Route exact path='/configure' component={() => <Configure config={stateConfig.config} dispatchConfig={dispatchConfig}/>}/>
         </Switch>
       </Router>
